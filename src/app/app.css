@@ -1,0 +1,204 @@
+:host {
+  --citla-purple: #9C27B0; /* Color principal branding */
+  --citla-blue: #2196F3;   /* Color secundario */
+  --citla-red: #F44336;   
+  --citla-bg: #f5f7fa;
+  --text-dark: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--citla-bg);
+  padding: 20px;
+}
+
+/* HEADER */
+.citla-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.logo-text {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: -2px;
+  color: #000;
+  margin: 0;
+}
+
+.logo-accent {
+  color: var(--citla-purple); [cite_start]
+}
+
+.slogan {
+  color: var(--citla-blue);
+  font-weight: 500;
+}
+
+/* TARJETAS (Cards) */
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.3s ease;
+}
+
+/* FORMULARIOS */
+.form-group, .question-block {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: var(--citla-purple);
+  outline: none;
+}
+
+/* BOTONES */
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, var(--citla-purple), var(--citla-blue));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: var(--citla-purple);
+  border: 2px solid var(--citla-purple);
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* RADIO BUTTONS ESTILIZADOS */
+.radio-group {
+  display: flex;
+  gap: 10px;
+}
+
+.radio-option {
+  flex: 1;
+  cursor: pointer;
+}
+
+.radio-option input {
+  display: none;
+}
+
+.radio-option span {
+  display: block;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.radio-option input:checked + span {
+  border-color: var(--citla-purple);
+  background-color: rgba(156, 39, 176, 0.1);
+  color: var(--citla-purple);
+  font-weight: bold;
+}
+
+/* ITINERARIO */
+.itinerary-view {
+  width: 100%;
+  max-width: 500px;
+}
+
+.itinerary-summary {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.badge {
+  background: var(--citla-blue);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.timeline-item {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.time-col {
+  width: 80px;
+  font-weight: bold;
+  color: var(--citla-purple);
+  padding-top: 20px;
+}
+
+.info-col {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+.details h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.details p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.animated-fade {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

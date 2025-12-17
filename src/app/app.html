@@ -1,0 +1,115 @@
+<div class="main-container">
+  
+  <header class="citla-header">
+    <div class="logo-container">
+      <h1 class="logo-text">CIT<span class="logo-accent">lA</span></h1>
+      <p class="slogan">Reconectando personas</p>
+    </div>
+  </header>
+
+  <section *ngIf="currentView === 'auth'" class="card auth-card">
+    <h2>{{ isLogin ? 'Iniciar Sesión' : 'Crear Cuenta' }}</h2>
+    
+    <form (ngSubmit)="submitAuth()">
+      <div class="form-group" *ngIf="!isLogin">
+        <label>Nombre Completo</label>
+        <input type="text" [(ngModel)]="user.name" name="name" placeholder="Tu nombre" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Correo Electrónico</label>
+        <input type="email" [(ngModel)]="user.email" name="email" placeholder="usuario@ejemplo.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" [(ngModel)]="user.password" name="password" placeholder="**" required>
+      </div>
+
+      <button type="submit" class="btn-primary">{{ isLogin ? 'Entrar' : 'Registrarse' }}</button>
+    </form>
+
+    <p class="toggle-text">
+      {{ isLogin ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?' }}
+      <a (click)="toggleAuth()">{{ isLogin ? 'Regístrate aquí' : 'Inicia sesión' }}</a>
+    </p>
+  </section>
+
+  <section *ngIf="currentView === 'survey'" class="card survey-card">
+    <h2>Planifica tu Salida</h2>
+    <p class="subtitle">Cuéntanos qué buscas hoy</p>
+
+    <form (ngSubmit)="generateItinerary()">
+      
+      <div class="question-block">
+        <label>1. ¿Qué tipo de plan te atrae más hoy?</label>
+        <select [(ngModel)]="survey.interest" name="interest" required>
+          <option value="" disabled selected>Selecciona una categoría</option>
+          <option *ngFor="let interest of interests" [value]="interest">{{ interest }}</option>
+        </select>
+      </div>
+
+      <div class="question-block">
+        <label>2. ¿Qué ambiente prefieres?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" [(ngModel)]="survey.activityType" name="activityType" value="chill" required>
+            <span>🧘 Tranquilo (Conversar)</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" [(ngModel)]="survey.activityType" name="activityType" value="active" required>
+            <span>🎉 Animado (Diversión)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <label>3. ¿Con quién vas?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" [(ngModel)]="survey.socialContext" name="socialContext" value="date" required>
+            <span>❤️ Cita (Pareja)</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" [(ngModel)]="survey.socialContext" name="socialContext" value="friends" required>
+            <span>👯 Salida con Amigos</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-block animated-fade" *ngIf="survey.socialContext === 'friends'">
+        <label>¿Cuántas personas van en total?</label>
+        <input type="number" [(ngModel)]="survey.groupSize" name="groupSize" min="2" max="10" class="input-number">
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="!survey.interest || !survey.socialContext">
+        ✨ Crear Itinerario Mágico
+      </button>
+    </form>
+  </section>
+
+  <section *ngIf="currentView === 'itinerary'" class="itinerary-view">
+    <h2>Tu Itinerario CitlA</h2>
+    <div class="itinerary-summary">
+      <span class="badge">{{ survey.interest }}</span>
+      <span class="badge">{{ survey.socialContext === 'date' ? 'Cita' : 'Grupo de ' + survey.groupSize }}</span>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item" *ngFor="let item of generatedItinerary">
+        <div class="time-col">{{ item.time }}</div>
+        <div class="info-col card">
+          <div class="icon">{{ item.icon }}</div>
+          <div class="details">
+            <h3>{{ item.activity }}</h3>
+            <p class="location">📍 {{ item.location }}</p>
+            <p class="cost">💰 Costo est: {{ item.cost }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-secondary" (click)="reset()">Planear otra salida</button>
+  </section>
+
+</div>
